@@ -1,5 +1,5 @@
 # EDA VISUALIZATIONS — Banking Churn
-# Objective: visually explore the features in relation to the target variable (churn: yes/no)
+# Objective: visually explore the features in relation to the target variable (churn = yes/no)
 # Outputs: eda_numerical.png + eda_categorical.png
 
 
