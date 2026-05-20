@@ -1,5 +1,5 @@
 # FEATURE ENGINEERING
-# Objective: transform raw data into features usable by a Machine Learning model
+# Transforming raw data into features usable by a Machine Learning model
 
 import pandas as pd
 import numpy as np
