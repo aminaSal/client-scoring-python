@@ -32,7 +32,7 @@ bank-churn-scoring/
 
 ## Dataset
 
-- **Source**: [Bank Marketing Dataset — UCI / Kaggle](https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset)
+- **Source**: [Bank Marketing Dataset - UCI / Kaggle](https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset)
 - **4,521 clients**, 16 features + 1 target (`y`: subscription → churn proxy)
 - **Class imbalance**: 88.5% non-churners / 11.5% churners
 
@@ -42,7 +42,7 @@ bank-churn-scoring/
 
 | Transformation | Variable(s) | Reason |
 |---|---|---|
-| Drop | `duration` | Data leak — unknown before the call |
+| Drop | `duration` | Data leak - unknown before the call |
 | Binary 0/1 | `default`, `housing`, `loan`, `y` | Only 2 modalities |
 | Ordinal | `education` | Natural order: primary < secondary < tertiary |
 | Cyclical sin/cos | `month` | Continuity between December and January |
@@ -63,7 +63,7 @@ Both models trained with `class_weight='balanced'` to handle class imbalance.
 | Precision | 0.189 | **0.636** |
 | F1-score | **0.285** | 0.222 |
 
-**Selected model: Logistic Regression** — 4× better recall, interpretable coefficients, and well-suited for a context where missing a churner is more costly than a false alarm.
+**Selected model: Logistic Regression** : 4× better recall, interpretable coefficients, and well-suited for a context where missing a churner is more costly than a false alarm.
 
 ---
 
@@ -74,7 +74,7 @@ Each client receives a churn probability score (average of LR + RF), segmented i
 | Segment | Threshold | Recommended Action |
 |---|---|---|
 | 🔴 High Risk | ≥ 0.60 | Priority commercial call |
-| 🟠 Moderate Risk | 0.35 – 0.60 | Targeted follow-up & offer |
+| 🟠 Moderate Risk | 0.35 - 0.60 | Targeted follow-up & offer |
 | 🟢 Low Risk | < 0.35 | No immediate action |
 
 ---
