@@ -13,10 +13,11 @@ bank-churn-scoring/
 │   ├── bank.csv                  # Raw dataset (semicolon-separated)
 │   └── bank_engineered.csv       # Dataset after feature engineering
 │
-├── eda_visualisations.py         # Exploration & visualisations
-├── feature_engineering.py        # Feature transformation
-├── modelling.py                  # Model training & comparison
-├── client_scoring.py             # Per-client churn score generation
+├── src/
+│   ├── eda_visualisations.py      # Exploration & visualisations
+│   └── feature_engineering.py     # Feature transformation
+│   └── modelling.py               # Model training & comparison
+│   └── client_scoring.py          # Per-client churn score generation
 │
 ├── outputs/
 │   ├── eda_numeric.png
