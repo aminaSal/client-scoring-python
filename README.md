@@ -1,4 +1,4 @@
-# 🏦 Bank Churn Scoring
+# Bank Churn Scoring
 
 Predicting customer churn for a bank using marketing campaign data. The project covers data exploration, feature engineering, and a comparison of two classification models.
 
@@ -29,7 +29,7 @@ bank-churn-scoring/
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - **Source**: [Bank Marketing Dataset — UCI / Kaggle](https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset)
 - **4,521 clients**, 16 features + 1 target (`y`: subscription → churn proxy)
@@ -37,7 +37,7 @@ bank-churn-scoring/
 
 ---
 
-## ⚙️ Feature Engineering
+## Feature Engineering
 
 | Transformation | Variable(s) | Reason |
 |---|---|---|
@@ -50,7 +50,7 @@ bank-churn-scoring/
 
 ---
 
-## 🤖 Models
+## Models
 
 Both models trained with `class_weight='balanced'` to handle class imbalance.
 
@@ -66,7 +66,7 @@ Both models trained with `class_weight='balanced'` to handle class imbalance.
 
 ---
 
-## 🎯 Client Scoring
+## Client Scoring
 
 Each client receives a churn probability score (average of LR + RF), segmented into 3 risk levels:
 
@@ -78,7 +78,7 @@ Each client receives a churn probability score (average of LR + RF), segmented i
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
 # 1. Install dependencies
