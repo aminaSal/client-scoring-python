@@ -1,10 +1,8 @@
 """
-╔══════════════════════════════════════════════════════════════════╗
-║         CLIENT SCORING — Bank Churn                             ║
-║  Goal: generate a churn probability score for each client       ║
-║  and segment them by risk level                                 ║
-║  Output: client_scores.csv                                      ║
-╚══════════════════════════════════════════════════════════════════╝
+       CLIENT SCORING — Bank Churn 
+Goal: generate a churn probability score for each client
+and segment them by risk level
+Output: client_scores.csv
 """
 
 import pandas as pd
@@ -17,9 +15,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# STEP 1 — Load data
-# ════════════════════════════════════════════════════════════════════════════
+# STEP 1 : Load data
 
 # Raw dataset to retrieve readable client info (job, age, balance…)
 df_raw = pd.read_csv('bank.csv', sep=';')
@@ -31,15 +27,13 @@ X = df.drop(columns=['churn'])
 y = df['churn']
 
 # Stratified split with the same random_state as training
-# → guarantees identical train/test indices on every run
+# guarantees identical train/test indices on every run
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# STEP 2 — Train models
-# ════════════════════════════════════════════════════════════════════════════
+# STEP 2 : Train models
 
 scaler = StandardScaler()
 X_train_sc = scaler.fit_transform(X_train)
@@ -52,12 +46,10 @@ rf = RandomForestClassifier(n_estimators=200, class_weight='balanced',
                              random_state=42, n_jobs=-1)
 rf.fit(X_train, y_train)
 
-print("✅ Models trained")
+print("Models trained")
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# STEP 3 — Generate per-client scores
-# ════════════════════════════════════════════════════════════════════════════
+# STEP 3 - Generate per-client scores
 
 # We use test set indices to link scores back to
 # readable fields from the raw dataset (job, age, balance…)
@@ -80,9 +72,7 @@ scores = pd.DataFrame({
 scores['avg_score'] = ((scores['score_lr'] + scores['score_rf']) / 2).round(4)
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# STEP 4 — Risk segmentation
-# ════════════════════════════════════════════════════════════════════════════
+# STEP 4 - Risk segmentation
 
 # Thresholds (0.35 and 0.60) are business decisions to tune based on:
 #   - cost of a retention action (targeting too broadly = wasted budget)
@@ -101,21 +91,19 @@ scores = scores.sort_values('avg_score', ascending=False).reset_index(drop=True)
 scores.index += 1  # Rank starts at 1 for readability
 
 
-# ════════════════════════════════════════════════════════════════════════════
-# STEP 5 — Display & export
-# ════════════════════════════════════════════════════════════════════════════
+# STEP 5 - Display & export
 
-print("\n📊 Top 20 highest-risk clients:")
+print("\nTop 20 highest-risk clients:")
 print(scores.head(20).to_string())
 
-print("\n📈 Segment distribution:")
+print("\nSegment distribution:")
 print(scores['risk_segment'].value_counts().to_string())
 
 # True churn rate per segment — validates that actual churners
 # land in the high-risk segments as expected
-print("\n🎯 Actual churn rate per segment:")
+print("\nActual churn rate per segment:")
 print(scores.groupby('risk_segment')['actual_churn'].mean().round(3).to_string())
 
-# Export CSV — ready to share with business/retention teams
+# Export CSV - ready to share with business/retention teams
 scores.to_csv('client_scores.csv', index=True, index_label='rank')
-print("\n💾 File exported → client_scores.csv")
+print("\nFile exported → client_scores.csv")
